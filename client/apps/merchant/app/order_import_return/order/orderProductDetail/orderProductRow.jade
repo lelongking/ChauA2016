@@ -33,11 +33,11 @@ template(name="orderProductRowDisplay")
           unless isBase
             span.super.s7.color-lime {{formatNumber basicQuantity}}
 
-    td.number.price.editable-field {{formatNumber price}}
+    td.number.price.editable-field(class="{{exportPrintClass}}") {{formatNumber price}}
 
-    td.number.bill-discount.editable-field
+    td.number.bill-discount.editable-field(class="{{exportPrintClass}}")
       span {{formatNumber discountCash}}
       //if discountPercent
       //   span.super.s7.color-lime -{{round discountPercent}}%
 
-    td.number.final-price <b>{{formatNumber finalPrice}}</b>
+    td.number.final-price(class="{{exportPrintClass}}") <b>{{formatNumber finalPrice}}</b>

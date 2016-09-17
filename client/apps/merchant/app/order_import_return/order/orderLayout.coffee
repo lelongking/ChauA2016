@@ -11,6 +11,7 @@ Wings.defineApp 'orderLayout',
   created: ->
     self = this
     self.currentOrder = new ReactiveVar({})
+    Session.set('exportPrintMode', false)
     self.autorun ()->
       if currentOrderId = Session.get('mySession')?.currentOrder
         currentOrder = Schema.orders.findOne({_id: currentOrderId})
@@ -36,7 +37,16 @@ Wings.defineApp 'orderLayout',
     tabOptions: -> tabOptions
 
   events:
-    "click .print-command": (event, template) -> window.print()
+    "click .print-command": (event, template) ->
+      Session.set("exportPrintMode", false)
+      Meteor.setTimeout ->
+        window.print()
+      , 50
+    "click .export-print-command": (event, template) ->
+      Session.set("exportPrintMode", true)
+      Meteor.setTimeout ->
+        window.print()
+      , 50
     "click .export-command": (event, template) ->
       link = window.document.createElement('a')
       link.setAttribute 'href', '/download/order/' + Session.get("currentOrder")._id

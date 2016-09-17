@@ -3,6 +3,7 @@ scope = logics.sales
 
 Wings.defineHyper 'orderProductDetail',
   helpers:
+    exportPrintClass: -> if Session.get('exportPrintMode') then 'hide-on-print' else ''
     buyer: -> Session.get('currentBuyer')
     billNo: ->
       customerBillNo = Helpers.orderCodeCreate(Session.get('currentBuyer')?.saleBillNo ? '00')
