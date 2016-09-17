@@ -1,0 +1,29 @@
+template(name="interestRateSearchCustomer")
+  .dual-addon
+    .search-filter.icon-search-8
+      input(name='searchFilter' type="text" placeholder="tìm khách hàng...")
+
+    .nano: .nano-content(style="margin-bottom: 35px;")
+      .group-wrapper
+        .caption.option lãi suất
+        .caption.inner.editInterestRate(class="{{activeClass true}}")
+          span.avatar.letter(class="icon-money-2")
+          span.text.uppercase: b mặc định
+
+      each customerGroupLists
+        if hasCustomerList
+          .list
+            .caption-item: b {{name}}
+
+            each customerListSearched
+              .doc-item(class="{{activeClass}}")
+                .avatar-wrapper: .avatar-image(class="{{hasAvatar}}"
+                style="background-image:url('{{avatarUrl}}')") {{aliasLetter this.lastName}}
+
+                .doc-info
+                  .title {{name}}
+                  .sub-title {{code}}
+
+                  .price-stamp
+                    b {{formatNumber interestAmount}}
+                    span(style="font-size: 11px;"): b VNĐ

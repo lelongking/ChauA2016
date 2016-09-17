@@ -1,0 +1,45 @@
+template(name="productGroupOverviewSection")
+  .section.top.panel.panel-default
+    input.hidden.avatarFile(type="file")
+    .panel-heading
+      +avatarImageComponent(avatar=avatarUrl alias=name)
+      .caption(data-toggle="tooltip" data-container="body" data-placement="right" title="tên nhóm sản phẩm")
+        span.editable.dashed(class="{{isEditMode false}}") {{name}}
+
+        input.editable.dashed.productGroupEdit(class="{{isEditMode true}}" maxlength="100" size="30"
+        name="productGroupName" value="{{name}}" placeholder="tên nhóm sản phẩm" )
+        //span.blured-color ({{productCount}} sản phẩm)
+
+      .sub1(data-toggle="tooltip" data-container="body" data-placement="right" title="số sản phẩm")
+        span.editable.dashed {{productCount}} sản phẩm
+
+      .sub2(data-toggle="tooltip" data-container="body" data-placement="right" title="ghi chú")
+        span.editable.dashed(class="{{isEditMode false}}" style="{{colorIsUndefined description}}") {{getString description 'ghi chú'}}
+
+        input.editable.dashed.productGroupEdit(class="{{isEditMode true}}" maxlength="100" size="40"
+        name="productGroupDescription" value="{{description}}" placeholder="ghi chú")
+
+
+
+      .commands
+        .lemon.btn.rounded.red.icon-minus-4.deleteProductGroup(class="{{showDeleteProductGroup}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="xóa")
+
+        .lemon.btn.rounded.lime.icon-ok-6.syncEditProductGroup(class="{{showSyncProductGroup}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="xác nhận")
+
+        .lemon.btn.rounded.peter-river.icon-reply-3.cancelEditProductGroup(class="{{isEditMode true}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="quay lại")
+
+        .lemon.btn.rounded.silver.icon-wrench-outline.unLockEditProduct(class="{{isEditMode false}}"
+        data-toggle="tooltip" data-container="body" data-placement="left" title="chỉnh sửa")
+
+    //.panel-tab
+    //  .panel-heading(style="padding-top: 6px; padding-bottom: 6px;")
+    //    span.icon-down-open-3.showTab(style="cursor:pointer;") Chuyển nhóm
+    //    +iSelect(options=productGroupSelects class="field changeProduct hidden")
+
+
+    .panel-footer.has-details
+      .editor-wrapper(style="width: 200px; padding-left: 5px;")
+        +iSelect(options=changeProductGroupSelected class="field changeProduct newComponent")

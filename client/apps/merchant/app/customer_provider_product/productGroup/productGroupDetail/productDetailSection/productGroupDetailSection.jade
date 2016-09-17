@@ -1,0 +1,49 @@
+template(name="productGroupDetailSection")
+  .section.panel.panel-default.printable-area
+    .panel-heading
+      .show-on-print
+        +merchantPrintingHeader
+        .printing-info
+          .document-name {{name}}
+
+      table.lemon-grid: tr
+        th(style="width:30px")
+          i.icon-search-8.searchProduct(style="color: #ABD4E3; font-size: 16px; cursor:pointer;")
+        th(style="width:auto")
+          if getSession 'productGroupDetailSectionSearchProduct'
+            input(name='searchProductFilter' type="text" placeholder="tìm sản phẩm...")
+          else
+            |TÊN SẢN PHẨM
+        th(style="width:80px; text-align:center") HẾT HẠN
+        th(style="width:80px; text-align:center") CÒN LẠI
+        th.number(style="width:160px") HÀNG TỒN KHO
+
+    .panel-body.debt-details
+      table.lemon-grid(style="cursor: pointer;")
+        +productGroupHeader
+        each productLists
+          tr.detail-row(class="{{selected}}")
+            if isManager
+              td.command.icon-ok-6
+            td {{name}}
+            td(style="text-align:center") {{momentFormat lastExpire 'DD/MM/YYYY'}}
+            td(style="text-align:center") {{lastExpireDays}}
+            td.number {{allQuantity}} {{unitName}}
+
+
+
+    //.panel-footer
+    //  .right-float
+    //    span.s5 TỔNG NỢ:
+    //    if isManager
+    //      span.s3 <b>{{formatNumber totalCash}}</b> VNĐ
+    //    else
+    //      span.s3 <b>{{formatNumber totalCashByStaff}}</b> VNĐ
+
+template(name="productGroupHeader")
+  tr
+    th(style="width:30px")
+    th(style="width:auto")
+    th(style="width:80px")
+    th(style="width:80px")
+    th(style="width:170px")

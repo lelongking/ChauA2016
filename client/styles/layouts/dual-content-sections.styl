@@ -1,0 +1,190 @@
+@require '../lib.import.styl'
+
+heavy-rounded = 5px
+.dual-content .section
+  .empty-dashed-line
+    width 100%; height 30px
+    border-bottom dashed 1px #dddddd
+    color #cccccc
+    padding 13px 0 0 20px
+    &:last-child
+      border-bottom none
+  &.multiple-selection-section
+    .collapsible-row
+      cursor pointer
+  &.options-section
+    border-radius heavy-rounded !important
+
+    .panel-heading
+      /*background-color #FFFFFF !important*/
+      font-weight lighter; text-transform uppercase
+      border-radius top heavy-rounded !important
+      color #7C7C7C
+      > span:before
+        margin-right 8px
+        font-size 18px
+        color #C2C2C2
+
+    .panel-body
+      border-top solid 1px #F0F0F0 !important
+
+    .panel-footer
+      border-radius bottom heavy-rounded !important
+      padding 0 10px
+
+    .collapsible-row
+      clearfix()
+      padding 0 10px
+      height 40px
+      line-height @height
+      border-bottom solid 1px #F0F0F0
+      &.dual-border
+        border-top solid 1px #F0F0F0
+      &.border-bottom
+        border-bottom solid 1px #f0f0f0 !important
+
+      .select2-container
+        min-width 200px
+
+      .long-description
+        overflow ellipsis
+        float left
+        padding-left 28px
+        width 90%
+        font-weight lighter; color #424242
+
+      .description
+        overflow ellipsis
+        float left
+        padding-left 28px
+        width 180px
+        font-weight lighter; color #424242
+      .input-field
+        float left
+        width 55%
+        height 39px; line-height 39px
+      .commands
+        float right
+        color blue
+        .switchery
+          display block
+          margin-top 7px
+
+      input.input-field[type="text"]
+        font-weight bolder
+
+
+    .collapsible-row:last-child
+      border-bottom none
+
+  &.new-options-section
+    border-radius heavy-rounded !important
+
+    .panel-heading
+      /*background-color #FFFFFF !important*/
+      font-weight lighter; text-transform uppercase
+      border-radius top heavy-rounded !important
+      color #7C7C7C
+      > span:before
+        margin-right 8px
+        font-size 18px
+        color #C2C2C2
+
+    .panel-body
+      border-top solid 1px #F0F0F0 !important
+
+    .panel-footer
+      border-radius bottom heavy-rounded !important
+      padding 0 10px
+
+    .collapsible-row
+      clearfix()
+      padding 0 10px
+      height 40px
+      line-height @height
+      &.dual-border
+        border-top solid 1px #F0F0F0
+
+      .long-description
+        overflow ellipsis
+        float left
+        padding-left 28px
+        width 90%
+        font-weight lighter; color #424242
+
+      .description
+        overflow ellipsis
+        float left
+        padding-right 15px
+        width 180px
+        color #424242
+        text-align right
+
+
+
+        input.form-control
+          height: 40px;
+          padding: 0;
+          border: none;
+          border-bottom: 1px solid #e0e0e0;
+          box-shadow: none;
+          border-radius: 0px;
+
+        span.input-group-addon
+          height 40px
+          border none
+          background-color #fff
+          padding 0px 0px 0px 10px
+
+      .input-field
+        float left
+        padding 0px 15px
+        width 40%;  height 39px; line-height 39px
+        border-bottom 1px solid #e0e0e0
+        transition 0.2s ease-in-out
+        -webkit-transition 0.2s ease-in-out
+        -o-transition 0.2s ease-in-out
+
+        &.editCash
+          height 40px
+          width 15%
+          padding 0
+          margin 0px 0px 0px 15px
+
+
+        &.error
+          border-bottom-color #DC1300
+        &:focus
+          box-shadow none
+          border-bottom-color #72B1DD !important;
+          box-shadow inset 0 -1px #72B1DD !important;
+          content ""
+
+      .commands
+        float right
+        color blue
+        .switchery
+          display block
+          margin-top 7px
+
+      input.input-field[type="text"]
+        font-weight bolder
+
+      i
+        margin-top: 10px;
+        border: 1px solid #e0e0e0;
+        line-height: 20px;
+        color: #e0e0e0;
+        cursor: pointer;
+        &.active
+          color: #338ECD;
+
+    .collapsible-row:last-child
+      border-bottom none
+      margin-bottom 10px
+
+  .editor-row
+    &:not(:last-child)
+      border-bottom solid 1px #ECECEC
+    &:not(:first-child)
+      margin-top 20px

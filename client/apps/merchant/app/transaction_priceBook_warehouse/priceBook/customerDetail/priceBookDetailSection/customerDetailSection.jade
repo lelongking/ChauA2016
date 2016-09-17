@@ -1,0 +1,55 @@
+template(name="customerPriceBookDetailSection")
+  .section.panel.panel-default.printable-area
+    .panel-heading
+      .show-on-print
+        +merchantPrintingHeader
+        .printing-info
+          .document-name {{name}}
+
+      table.lemon-grid: tr
+        if isGroup
+          th.selectAll.icon-ok-6.hide-on-print(style="width:30px; cursor: pointer; color:{{selectAll}};")
+
+        if getSession 'customerPriceBookDetailSectionSearchProduct'
+          th(style="width:auto")
+            input(name='searchProductFilter' type="text" placeholder="tìm sản phẩm...")
+        else
+          th(style="width:auto")
+            |TÊN SẢN PHẨM
+            i.icon-search-8.rotateY180.searchProduct(
+            style="color: #ABD4E3; font-size: 16px; cursor:pointer; padding-left: 10px;")
+
+
+        th.number(style="width:100px") ĐƠN VỊ
+        th.number(style="width:130px") GIÁ TIỀN MẶT
+        th.number(style="width:130px") GIÁ BÁN NỢ
+
+    .panel-body.debt-details
+      table.lemon-grid
+        tr
+          if isGroup
+            th(style="width:30px").hide-on-print
+          th(style="width:auto")
+          th(style="width:70px")
+          th(style="width:130px")
+          th(style="width:140px")
+
+        each allProductUnits
+          if isRowEditing
+            +priceBookCustomerDetailRowEdit
+          else
+            tr.detail-row(class="{{productSelected}}")
+              if isGroup
+                td.command.icon-ok-6.hide-on-print
+              td.first-column.has-commands
+               |{{productName}}
+               .commands: .lemon.rounded.tiny.btn.blue.animated.bounceIn.deleteUnitPrice: span.icon-minus-4
+              td.date {{productUnitName}}
+              td.number {{formatNumber salePrice}} VNĐ
+              td.number {{formatNumber saleDebtPrice}} VNĐ
+    //
+    //.panel-footer
+    //  .right-float
+    //    span.s5 TỔNG NỢ:
+    //    span.s3 <b>{{formatNumber finalDebtBalance}}</b> VNĐ
+        //h3 Tổng tiền: {{formatNumber totalPurchases}} VNĐ

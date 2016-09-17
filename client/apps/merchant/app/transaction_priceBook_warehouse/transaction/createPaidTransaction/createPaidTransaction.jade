@@ -1,0 +1,55 @@
+template(name="createPaidTransaction")
+  .section.panel.panel-default.printable-area
+    .panel-heading
+      .hide-on-print.text-align-center(style="position: relative; color: #7c7c7c; font-weight: lighter; height: 20px;")
+        span(style="position: absolute; left: 0px;")
+          <b>{{timeHM}}<sup>{{timeS}}</sup></b>, ngày <b>{{timeDMY}}</b> <b>{{fullDay}}</b>
+
+        span.uppercase {{currentOwner.transactionName}}
+        span.uppercase: b {{currentOwner.name}}
+
+      .show-on-print
+        +merchantPrintingHeader(owner=currentOwner title=title position='Người nhập')
+
+    .panel-body(style="border-color: #fff;")
+      table.lemon-grid
+        tr
+          th(style="width:auto")
+          th(style="width:100px")
+          th(style="width:5px")
+          th(style="width:200px")
+
+        tr(style="height: 35px; {{showTransaction}}; border-top: solid 1px #d7d7d7; border-bottom: solid 1px #d7d7d7;")
+          td: input.transaction-field(name='transactionDescription' placeholder="ghi chú {{currentOwner.transactionName}}")
+          td(colspan="2")
+          td: input.transaction-field(name='transactionAmount' placeholder="số tiền")
+
+        tr(style="height: 20px;")
+
+        tr
+          td.date
+            if isCustomer
+              span.uppercase khách hàng
+            else
+              span.uppercase người nhận
+
+          td Tiền Nợ
+          td.number :
+          td.number: <b>{{formatNumber currentOwner.debitCash}}</b> VNĐ
+        tr
+          td
+          td {{currentOwner.transactionName}}
+          td.number :
+          td.number:  <b>{{formatNumber currentOwner.amountCash}}</b> VNĐ
+        tr
+          td.date: span.s6.note (<i>Chữ ký và Họ Tên</i>)
+          td: b Tổng Nợ:
+          td.number: b :
+          td.number(style="border-top: solid 1px #d7d7d7"):  <b>{{formatNumber currentOwner.totalCash}} VNĐ </b>
+
+    .panel-footer.show-on-print
+      .grea-print-message
+        .rounded-gera-logo: .rounded-wrapper
+          img(src="/images/white-pixel.jpg")
+          img(style="width: 40px; position: absolute; top: 3px; left: 3px; " src="/images/noinoi.png")
+        i(style="font-size: 16px;") In từ hệ thống www.noinoi.vn - công ty Công Nghệ Thiên Ban (0978 188 119)

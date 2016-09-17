@@ -1,0 +1,70 @@
+template(name="interestRateCustomerOverviewSection")
+  .section.top.panel.panel-default
+    //input.hidden.avatarFile(type="file")
+    .panel-heading
+      +avatarImageComponent(avatar=avatarUrl alias=name)
+      .caption.editable.dashed(data-toggle="tooltip" data-container="body" data-placement="right" title="tên khách hàng")
+        span(style="{{colorIsUndefined name}}") {{name}}
+
+      .sub1.editable.dashed(data-toggle="tooltip" data-container="body" data-placement="right" title="lãi suất đầu kỳ")
+        span(class="{{isEditMode false}}") {{interestRateInitial}}
+
+        input.edit-field.customerEdit(style="width: 30px;" placeholder="đầu kỳ"
+        class="{{isEditMode true}}" name="initialInterest")
+
+        span.blured-color(class="{{isEditMode true}}") %/tháng
+
+
+      .sub2.editable.dashed(data-toggle="tooltip" data-container="body" data-placement="right" title="lãi suất bán hàng")
+        span(class="{{isEditMode false}}") {{interestRateSale}}
+
+        input.edit-field.customerEdit(style="width: 30px;" placeholder="bán hàng"
+        class="{{isEditMode true}}" name="saleInterest")
+
+        span.blured-color(class="{{isEditMode true}}") %/tháng
+
+
+
+      .commands
+        .lemon.btn.rounded.lime.icon-ok-6.syncCustomerEdit(class="{{showSyncCustomer}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="xác nhận")
+
+        .lemon.btn.rounded.peter-river.icon-reply-3.cancelCustomer(class="{{isEditMode true}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="quay lại")
+
+        .lemon.btn.rounded.silver.icon-wrench-outline.editCustomer(class="{{isEditMode false}}"
+        data-toggle="tooltip" data-container="body" data-placement="left" title="chỉnh sửa")
+
+    .panel-tab
+      .panel-heading(style="padding-top: 6px; padding-bottom: 6px;")
+        span.icon-down-open-3 Thông tin mở rộng
+        //span.icon-up-open-3.hideTab(class="{{isShowTab true}}" style="cursor:pointer;") Thông tin mở rộng
+
+    //
+    //  .panel-body(class="{{isShowTab true}}")
+    //    .collapsible-row
+    //      .description Mã khách hàng
+    //      span.editable.dashed(class="{{isEditMode false}}") {{getString code}}
+    //      input.input-field.customerEdit(class="{{isEditMode true}}" value="{{code}}"
+    //      name="customerCode" placeholder="{{getString code}}")
+    //
+    //    .collapsible-row
+    //      .description Nhóm khách hàng
+    //      +iSelect(options=customerGroupSelected class="field changeCustomerGroup")
+    //
+    //    .collapsible-row
+    //      .description Giới tính
+    //      .genderSwitch
+    //        input.input-field.customerEdit(name="genderSwitch" type="checkbox" checked)
+    //
+    //    .collapsible-row
+    //      .description Sinh nhật
+    //      span.editable.dashed(class="{{isEditMode false}}") {{momentFormat profiles.dateOfBirth 'DD/MM/YYYY'}}
+    //      input.input-field.customerEdit(class="{{isEditMode true}}"
+    //      name="dateOfBirth" binding="datePicker" todayHighlight="true" maxlength="20" tabindex="4")
+    //
+    //    .collapsible-row
+    //      .description Ghi chú
+    //      span.editable.dashed(class="{{isEditMode false}}") {{getString profiles.description ''}}
+    //      input.input-field.customerEdit(class="{{isEditMode true}}" value="{{profiles.description}}"
+    //      name="customerDescription" placeholder="Ghi thêm thông tin")

@@ -1,0 +1,42 @@
+template(name="orderManager")
+  #content.modern
+    .dual-content
+      .dual-addon
+        .group-nav
+          .caption.inner.toHistoryOrder.active
+            span.avatar.letter {{getPublishedCount 'orderManagers'}}
+            span.text.uppercase BÁN HÀNG
+          .caption.inner.toHistoryOrderReturn
+            span.avatar.letter {{getPublishedCount 'customerReturnHistories'}}
+            span.text.uppercase TRẢ HÀNG BÁN
+          .caption.inner.toHistoryImport
+            span.avatar.letter {{getPublishedCount 'imports'}}
+            span.text.uppercase NHẬP KHO
+          .caption.inner.toHistoryImportReturn
+            span.avatar.letter {{getPublishedCount 'providerReturnHistories'}}
+            span.text.uppercase TRẢ HÀNG NHẬP
+
+        .search-filter.icon-search-8
+          input(name='searchFilter' type="text" placeholder="tìm đơn hàng..." value="{{productTextSearch}}")
+
+        .nano: .nano-content(style="margin-bottom: 35px;")
+          each details
+            .group-wrapper
+              .caption.group
+                div(style="position: relative; padding-bottom: 2px;")
+                  |{{createdAt}}
+                  div(style="position: absolute; top: 0px; right: 5px;") <b>{{formatNumber totalCash}} VNĐ</b>
+
+                each data
+                  .caption.inner.advanced.product-selection(class="{{activeClass 'currentOrderBill'}}")
+                    +avatarImageComponent(avatar=avatarUrl alias=orderName)
+                    span.text {{orderName}}
+                      .commands {{momentFormat accountingConfirmAt 'DD/MM/YYYY'}}
+                    span.left-info {{getSellerName seller}}
+                    span.right-info {{formatNumber finalPrice}} VNĐ
+
+      .dual-detail-wrapper
+        .dual-detail
+          .nano: .nano-content
+            +orderDetailSection sessionGet 'currentOrderBill'
+

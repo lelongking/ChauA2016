@@ -1,0 +1,40 @@
+template(name="providerCreate")
+  .dual-detail-wrapper: .dual-detail
+    .nano: .nano-content
+      .section.top.panel.panel-default.new-options-section
+        .panel-heading
+          span.icon-contacts tạo nhà cung cấp
+          .commands
+            .lemon.btn.lime.icon-ok-6.addProvider Lưu
+            .lemon.btn.red.icon-cancel-7.cancelProvider Hủy
+
+        .panel-body
+          .collapsible-row
+            .description Tên nhà cung cấp
+            input.input-field(name="providerName" placeholder="Nhập nhà cung cấp")
+          .collapsible-row
+            .description Điện thoại
+            input.input-field(name="providerPhone" placeholder="Nhập số điện thoại")
+          .collapsible-row
+            .description Địa chỉ
+            input.input-field(name="providerAddress" placeholder="Nhập địa chỉ")
+          .collapsible-row
+            .description Người đại diện
+            input.input-field(name="providerRepresentative" placeholder="Người đại diện")
+          .collapsible-row
+            .description Mã nhà cung cấp
+            input.input-field(name="providerCode" placeholder="{{codeDefault}}")
+          //.collapsible-row
+          //  .description Nợ đầu kỳ
+          //  input.input-field(name="providerDebit" placeholder="Nhập nợ đầu kỳ")
+          //.collapsible-row
+          //  .description Lãi suất
+          //  input.input-field(name="providerInterestRate" placeholder="Nhập lãi suất của nợ đầu kỳ")
+          //.collapsible-row
+          //  .description Ngày nợ
+          //  input.input-field(name="providerDebitDate" placeholder="Nhập ngày nợ đầu kỳ"
+          //  binding="datePicker" todayHighlight="true")
+          .collapsible-row
+            .description Ghi chú
+            input.input-field(name="providerDescription" placeholder="Ghi thêm thông tin"
+            style="width: 70%;")

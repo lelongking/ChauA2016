@@ -1,0 +1,76 @@
+template(name="transaction")
+  #header
+    .editor-row
+      .editor-wrapper.dual-spacer
+      if isShowCustomerSelectOption
+        .editor-wrapper(style="width: 300px")
+          span.ilabel.optional Tên Khách Hàng :
+          +iSelect(options=ownerSelectOptions class="field")
+
+      if isShowProviderSelectOption
+        .editor-wrapper(style="width: 300px")
+          span.ilabel.optional Tên Nhà Cung Cấp :
+          +iSelect(options=ownerSelectOptions class="field")
+
+        //.editor-wrapper(style="width: 250px")
+        //  span.ilabel.optional Loại phiếu:
+        //  +iSelect(options=customerIncomeOrCostSelectOptions class="field")
+      if isShowSubmit
+        .editor-wrapper.pull-right
+          button.flat.btn.lime.createTransaction XÁC NHẬN
+
+        .editor-wrapper.pull-right
+          button.flat.btn.blue.pull-right.print-command(data-toggle="tooltip" data-container="body"
+          data-placement="top" title="In phiếu thu chi" type='submit'): span.icon-print-6
+
+
+
+
+  #content.modern
+    .dual-content
+      .dual-addon
+        .group-wrapper
+          .caption.option khách hàng
+          .caption.inner.toCustomerEditInitialInterest(class="{{isActiveClass 'customerInitialInterest'}}")
+            span.avatar.letter(class="icon-credit-card")
+            span.text.uppercase: b nợ đầu kỳ
+
+          .caption.inner.toCustomerAddLoanCash(class="{{isActiveClass 'customerLoanCash'}}")
+            span.avatar.letter(class="icon-money")
+            span.text.uppercase: b nhập nợ
+
+          .caption.inner.toCustomerAddPaidCash(class="{{isActiveClass 'customerPaidCash'}}")
+            span.avatar.letter(class="icon-money-1")
+            span.text.uppercase: b thu tiền
+
+          .caption.option nhà cung cấp
+          .caption.inner.toProviderEditInitialInterest(class="{{isActiveClass 'providerInitialInterest'}}")
+            span.avatar.letter(class="icon-credit-card")
+            span.text.uppercase: b nợ đầu kỳ
+
+          .caption.inner.toProviderAddPaidCash(class="{{isActiveClass 'providerPaidCash'}}")
+            span.avatar.letter(class="icon-flash-outline")
+            span.text.uppercase: b trả tiền
+
+          //.caption.option lãi suất
+          //.caption.inner.toEditInterestRate(class="{{isActiveClass 'interestRateManager'}}")
+          //  span.avatar.letter(class="icon-home-4")
+          //  span.text.uppercase: b lãi suất
+
+
+      .dual-detail-wrapper
+        .dual-detail
+          .nano: .nano-content
+            +Template.dynamic(template=currentData.template data=currentData.data)
+
+
+  //#footer.modern
+  //  .editor-row
+  //    .editor-wrapper.dual-spacer
+
+
+
+
+
+
+

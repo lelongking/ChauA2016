@@ -1,0 +1,33 @@
+template(name="productSearch")
+  .dual-addon
+    .group-nav
+      .caption.inner.active
+        span.avatar.letter {{getPublishedCount 'products'}}
+        span.text.uppercase SẢN PHẨM
+      .caption.inner.toProductGroup
+        span.avatar.letter {{getPublishedCount 'productGroups'}}
+        span.text.uppercase NHÓM SẢN PHẨM
+
+
+    .search-filter.icon-search-8
+      input(name='searchFilter' type="text" placeholder="tìm sản phẩm...")
+      .icon-plus-6.create-new-command(data-toggle="tooltip" data-container="body" data-placement="right" title="Tạo mới")
+
+    .nano: .nano-content(style="margin-bottom: 120px;")
+      each productGroupLists
+        if hasProductList
+          .list
+            .caption-item: b {{name}}
+
+            each productListSearched
+              .doc-item(class="{{activeClass}}")
+                .avatar-wrapper: .avatar-image(class="{{hasAvatar}}"
+                style="background-image:url('{{avatarUrl}}')") {{aliasLetter name}}
+
+                .doc-info
+                  .title {{name}}
+                  .sub-title {{code}}
+
+                  .price-stamp
+                    b {{formatNumber inStockQuantity}}
+                    span(style="font-size: 11px;"): b {{unitName}}

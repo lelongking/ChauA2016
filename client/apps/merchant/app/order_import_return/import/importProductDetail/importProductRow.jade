@@ -1,0 +1,32 @@
+template(name="importProductRowEdit")
+  tr.editors.dual-border
+    td.note.has-commands
+      |{{getProductName product}}
+      .commands
+        .lemon.rounded.tiny.btn.blue.animated.bounceIn.deleteImportDetail: span.icon-minus-4
+    td.editable-field: input(name="editExpireDate" min="0")
+    td.editable-field: input(name="editImportQuantity" min="0")
+    td {{getProductUnitName productUnit}}
+    td.number.editable-field: input(name="editProductPrice" min="0")
+    td.number.note: b {{formatNumber detailFinalPrice}}
+
+template(name="importProductRowDisplay")
+  tr.detail-row.click-enable
+    td.has-commands
+      |{{getProductName product}}
+      .commands
+        .lemon.rounded.tiny.btn.blue.deleteImportDetail: span.icon-minus-4
+    td
+      if expire
+        |{{momentFormat expire 'DD/MM/YYYY'}}
+      else
+        |Không
+    td {{formatNumber quality}}
+    td
+      span
+        |{{getProductUnitName productUnit}}
+        unless isBase
+          span.super.s7.color-lime {{formatNumber basicQuantity}}
+
+    td.number {{formatNumber price}}
+    td.number <b>{{formatNumber detailFinalPrice}}</b>

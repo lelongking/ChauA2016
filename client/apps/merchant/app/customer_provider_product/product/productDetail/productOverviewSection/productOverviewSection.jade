@@ -1,0 +1,151 @@
+template(name="productOverviewSection")
+  .section.top.panel.panel-default
+    input.hidden.avatarFile(type="file")
+    .panel-heading
+      +avatarImageComponent(avatar=avatarUrl alias=name)
+      .caption(data-toggle="tooltip" data-container="body" data-placement="right" title="tên sản phẩm")
+        span.editable.dashed(class="{{isEditMode false}}") {{name}}
+
+        input.editable.dashed.productEdit(class="{{isEditMode true}}" maxlength="50" size="20"
+        name="productName" placeholder="tên sản phẩm" value="{{name}}")
+
+      with productUnitDetail
+        .sub1(data-toggle="tooltip" data-container="body" data-placement="right" title="giá bán nợ")
+          span.editable.dashed(class="{{isEditMode false}}") {{formatNumber debtSalePrice}} VNĐ
+
+          input.editable.dashed(class="{{isEditMode true}}" maxlength="50" size="15"
+          name="debtSalePriceSub" placeholder="giá bán nợ")
+
+        .sub2(data-toggle="tooltip" data-container="body" data-placement="right" title="đơn vị tính")
+          span.editable.dashed(class="{{isEditMode false}}") {{unitName}}
+
+          input.editable.dashed(class="{{isEditMode true}}" maxlength="100" size="10"
+           name="unitNameSub" placeholder="đơn vị tính" value="{{unitName}}")
+
+
+
+      .commands
+        .lemon.btn.rounded.red.icon-minus-4.productDelete(class="{{showDeleteProduct}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="xóa")
+
+        .lemon.btn.rounded.lime.icon-ok-6.syncProductEdit(class="{{showSyncProduct}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="xác nhận")
+
+        .lemon.btn.rounded.peter-river.icon-reply-3.cancelProduct(class="{{isEditMode true}}"
+        data-toggle="tooltip" data-container="body" data-placement="bottom" title="quay lại")
+
+        .lemon.btn.rounded.silver.icon-wrench-outline.editProduct(class="{{isEditMode false}}"
+        data-toggle="tooltip" data-container="body" data-placement="left" title="chỉnh sửa")
+
+    .panel-tab
+      .panel-heading(style="padding-top: 6px; padding-bottom: 6px; border-radius: 5px;")
+        span.icon-up-open-3.hideTab(class="{{isShowTab true}}" style="cursor:pointer;") Thông tin mở rộng
+        span.icon-down-open-3.showTab(class="{{isShowTab false}}" style="cursor:pointer;") Thông tin mở rộng
+
+
+      .panel-body(class="{{isShowTab true}} ")
+        .collapsible-row
+          .description Mã sản phẩm
+          span.editable.dashed(class="{{isEditMode false}}") {{getString code}}
+          input.input-field(class="{{isEditMode true}}" value="{{code}}"
+          name="productCode" placeholder="{{getString code}}")
+
+        .collapsible-row
+          .description Nhóm sản phẩm
+          +iSelect(options=productGroupSelected class="field changeProductGroup")
+
+        .collapsible-row
+          .description Ghi chú
+          span.editable.dashed(class="{{isEditMode false}}") {{getString description ''}}
+          input.input-field(class="{{isEditMode true}}"  value="{{description}}"
+          name="productDescription" placeholder="Ghi thêm thông tin")
+
+
+
+      with productUnitDetail
+        .panel-body(class="{{isShowTab true}}" style=" margin-top: 0px;")
+          .collapsible-row.full-width.pull-right
+            .description.width-th.pull-right Giá tiền mặt
+            .description.width-th.pull-right Giá bán nợ
+            .description.width-th.pull-right Giá nhập
+            .description.width-th.pull-right Mã vạch
+            .description.width-th(style="width: 120px; margin: 0; padding-left: 15px; text-align: left;")
+              span Đơn vị tính
+              if addUnitEx
+                i.icon-plus-6.active.addUnitEx(class="{{isEditMode true}}" style="border: none; color: #abd4e3;"
+                data-toggle="tooltip" data-container="body" data-placement="bottom" title="thêm mới")
+
+
+          .collapsible-row.full-width.pull-right
+            span.editable.dashed.pull-right.editCash(class="{{isEditMode false}}") {{formatNumber directSalePrice}} VNĐ
+            span.editable.dashed.pull-right.editCash(class="{{isEditMode false}}") {{formatNumber debtSalePrice}} VNĐ
+            span.editable.dashed.pull-right.editCash(class="{{isEditMode false}}") {{formatNumber importPrice}} VNĐ
+            span.editable.dashed.pull-right.editCash(class="{{isEditMode false}}") {{barcode}}
+            span.editable.dashed.editCash(class="{{isEditMode false}}" style="width: 25%; text-align: left;") {{unitName}}
+
+            input.input-field.edit-field.pull-right.editCash(class="{{isEditMode true}}" name="directSalePrice")
+            input.input-field.edit-field.pull-right.editCash(class="{{isEditMode true}}" name="debtSalePrice")
+            input.input-field.edit-field.pull-right.editCash(class="{{isEditMode true}}" name="importPrice")
+            input.input-field.pull-right.editCash(class="{{isEditMode true}}" name="barcode" style="text-align: right;")
+            input.input-field.editCash(class="{{isEditMode true}}" name="unitName" style="width: 28%; text-align: left;" value="{{unitName}}")
+
+
+          .collapsible-row.full-width.pull-right(class="{{showLockUnitEX}}")
+            span.editable.dashed.pull-right.editCash {{formatNumber directSalePriceEx}} VNĐ
+            span.editable.dashed.pull-right.editCash {{formatNumber debtSalePriceEx}} VNĐ
+            span.editable.dashed.pull-right.editCash {{formatNumber importPriceEx}} VNĐ
+
+            span.editable.dashed.pull-right.editCash(class="{{isEditMode false}}") {{barcodeEx}}
+            span.editable.dashed.editCash(class="{{isEditMode false}}") {{unitNameEx}} ({{formatNumber conversion}} {{unitName}})
+
+
+            input.input-field.pull-right.editCash(class="{{isEditMode true}}" name="barcodeEx" style="text-align: right;")
+            if showDeleteUnitEx
+              span.icon-trash.red.pull-right.removeUnitEx(class="{{isEditMode true}}" style="cursor: pointer;"
+              data-toggle="tooltip" data-container="body" data-placement="bottom" title="xóa")
+
+            .description.editCash(class="{{isEditMode true}}" style="width: 25%; min-width: 180px")
+              .input-group
+                input.form-control.input-field.full-width(name="unitNameEx" value="{{unitNameEx}}")
+                span.input-group-addon(style="width: 15px; padding: 0") =
+                input.form-control.input-field.full-width(class="{{isShowConversion true}}" name="conversion" value="{{conversion}}")
+                span.form-control.input-field.full-width.pull-right.editable.editCash.dashed(class="{{isShowConversion false}}") {{conversion}}
+                span.input-group-addon(style="padding: 0px 0px 0px 10px;") {{unitName}}
+
+
+
+
+
+        .panel-body(class="{{isShowTab true}}" style=" margin-top: 10px;")
+          .collapsible-row(class="{{isEditMode false}}")
+            .description Tồn kho đầu kỳ
+            span.editable.dashed {{importQuality}}
+          .collapsible-row(class="{{isEditMode false}}")
+            .description Định mức tồn kho
+            span.editable.dashed {{formatNumber lowNorms}} {{unitName}}
+
+
+
+          .collapsible-row.full-width.pull-right(class="{{isEditMode true}}")
+            .description Tồn kho đầu kỳ
+            .description.editCash(style="width: 20%; min-width: 200px; height: 40px; padding-left: 15px;"): .input-group
+              //input.form-control.input-field.full-width(class="{{isShowInventory false}}" name="importQuality")
+              input.form-control.input-field.full-width(name="importQuality")
+
+              //span.form-control.input-field.full-width.pull-right.editable.editCash.dashed(class="{{isShowInventory true}}") {{inventoryQuality}}
+              span.input-group-addon {{unitName}}
+
+            span.editable.pull-right(class="{{isShowInventory false}}") Chưa nhập tồn kho lúc này
+            i.icon-ok-6.pull-right.inventory(class="{{isInventory}} {{isShowInventory false}}")
+
+          .collapsible-row.full-width.pull-right(class="{{isEditMode true}}" style="margin-bottom: 0px;")
+            .description Định mức tồn kho
+            .description.editCash(style="width: 20%; min-width: 200px; ; padding-left: 15px;")
+              .input-group
+                input.form-control.input-field.full-width(name="lowNorms")
+                span.input-group-addon {{unitName}}
+
+
+
+
+

@@ -1,0 +1,50 @@
+template(name="createLoanTransaction")
+  .section.panel.panel-default.top.options-section
+    .panel-heading
+      .hide-on-print.text-align-center(style="position: relative; color: #7c7c7c;")
+        span(style="position: absolute; left: 0px; text-transform: none")
+          <b>{{timeHM}}<sup>{{timeS}}</sup></b>, ngày <b>{{timeDMY}}</b> <b>{{fullDay}}</b>
+
+        span(style="text-transform: uppercase;") <b>{{currentOwner.name}}</b> {{currentOwner.transactionName}}
+
+    .panel-body
+      .collapsible-row
+        .description(style="font-weight: normal") Tiền vay
+        input.input-field.float-right.transaction-field(name="transactionAmount" placeholder="Nhập số tiền vay" tabindex="1"
+        style="padding-right: 10px;")
+
+      .collapsible-row
+        .description(style="font-weight: normal") Lãi suất
+        input.input-field.float-right.transaction-field(name="transactionInterestRate" placeholder="Nhập lãi suất tiền vay" tabindex="2"
+        style="padding-right: 10px;")
+
+
+      .collapsible-row
+        .description(style="font-weight: normal") Ghi chú
+        input.input-field.float-right.text-align-right.transaction-field(name="transactionDescription" placeholder="Nhập ghi chú tiền vay" tabindex="3"
+        style="padding-right: 10px;")
+
+
+    .panel-footer(style="border-top: solid 4px #EFEFF4;")
+      table.lemon-grid
+        tr
+          th(style="width:auto")
+          th(style="width:80px")
+          th(style="width:5px")
+          th(style="width:200px")
+
+        tr
+          td
+          td Tiền vay
+          td.number :
+          td.number <b>{{formatNumber currentOwner.amountCash}}</b> VNĐ
+        tr
+          td
+          td Tiền nợ
+          td.number :
+          td.number <b>{{formatNumber currentOwner.totalDebitCash}}</b> VNĐ
+        tr
+          td
+          td: b Tổng nợ
+          td.number: b :
+          td.number(style="border-top: solid 1px #d7d7d7"): b {{formatNumber currentOwner.totalCash}} VNĐ
