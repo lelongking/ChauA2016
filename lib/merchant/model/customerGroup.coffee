@@ -47,7 +47,7 @@ Schema.add 'customerGroups', "CustomerGroup", class CustomerGroup
 
           paidCash  += customer.paidCash
           totalCash += customer.totalCash
-          debitCash += customer.totalCash - customer.paidCash
+          debitCash += customer.totalCash + customer.paidCash
       )
       Schema.customerGroups.update(doc._id, $set:{totalCash: totalCash, paidCash: paidCash, debitCash: debitCash})
 

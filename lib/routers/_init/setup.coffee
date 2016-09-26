@@ -7,13 +7,13 @@ publicRouter = Wings.Routers.publicRouter =
     name: "public"
     triggersEnter: [ (context, redirect, stop) ->
       console.log context.path, context.queryParams
-      if context.path is '/'
-        location.reload()
+#      if context.path is '/'
+#        location.reload()
+#      else
+      if Meteor.userId()
+        redirect '/merchant'
       else
-        if Meteor.userId()
-          redirect '/merchant'
-        else
-          redirect '/merchant/login'
+        redirect '/merchant/login'
       stop()
       return
     ]
@@ -26,11 +26,11 @@ publicRouter.route '/',
     return
   triggersEnter: [ (context, redirect) ->
 #    location.reload()
-#    if Meteor.userId()
-#      redirect '/merchant'
-#    else
-#      redirect '/merchant/login'
-#    stop()
+    if Meteor.userId()
+      redirect '/merchant'
+    else
+      redirect '/merchant/login'
+    stop()
     return
   ]
 
