@@ -2,7 +2,7 @@ scope = logics.sales
 Wings.defineHyper 'orderProductRowDisplay',
   helpers:
     hasSelected: -> if @interestRate then 'color: #2e8bcc;' else 'color: #d8d8d8;'
-
+    exportPrintClass: -> if Session.get('exportPrintMode') then 'hide-on-print' else ''
 
 Wings.defineHyper 'orderProductRowEdit',
   rendered: ->
